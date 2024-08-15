@@ -4,14 +4,14 @@ import { Platform, StyleSheet } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 
-export default function ModalScreen() {
+export default function notificationsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Notifications</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
+      <EditScreenInfo path="app/notifications.tsx" />
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
+      {/* Use a light status bar on iOS to account for the black space above the notifications */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
   );
