@@ -2,13 +2,10 @@ import { StyleSheet } from 'react-native';
 import HalfPremium from '@/components/Guage/HalfPremium';
 import { Text, View } from '@/components/Themed';
 
-export default function TabTwoScreen() {
+export default function DetectScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Water Quality Management</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
-      <HalfPremium size={200} value={90}/>
+      <Text>This is the page where you can see the debris</Text>
     </View>
   );
 }
