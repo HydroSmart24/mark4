@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-interface HalfPremiumProps {
+interface HomeFilterHealthProps {
   size?: number;
   value?: number; // The dynamic value to be passed, optional
 }
 
-const HalfPremium: React.FC<HalfPremiumProps> = ({ size = 80, value = 0 }) => {
+const HomeFilterHealth: React.FC<HomeFilterHealthProps> = ({ size = 80, value = 0 }) => {
   const adjustedSize = size / 2; // Adjust to scale the SVG correctly
-  const strokeWidth = 3; // Fixed stroke width since we're working within a fixed viewBox
+  const strokeWidth = 2; // Fixed stroke width since we're working within a fixed viewBox
   const circleRadius = 16; // Radius is fixed according to the viewBox
-  const progressStrokeWidth = 1; // Define the progress stroke width
+  const progressStrokeWidth = 2; // Define the progress stroke width
   const circumference = 2 * Math.PI * circleRadius; // Calculate the circumference of the circle
 
   // Initialize animated value with 0 to ensure animation starts from 0
@@ -75,14 +75,15 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({ size = 80, value = 0 }) => {
           top: adjustedSize * 0.8, // Adjust based on size
           left: '50%',
           transform: [
-            { translateX: -(adjustedSize * 0.52) },
-            { translateY: -(adjustedSize * 0.50) },
+            { translateX: -(adjustedSize * 0.35) },
+            { translateY: -(adjustedSize * 0.35) },
           ],
         }}
       >
         <Text style={{ ...styles.valueText, fontSize: adjustedSize * 0.4 }}>{value}%</Text>
-        <Text style={{ ...styles.labelText, fontSize: adjustedSize * 0.20 }}>Filter Health</Text>
+        
       </View>
+      
     </View>
   );
 };
@@ -108,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HalfPremium;
+export default HomeFilterHealth;
