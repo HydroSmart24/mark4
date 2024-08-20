@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Link } from 'expo-router';
 
 interface ButtonProps {
   title: string;
@@ -9,9 +10,14 @@ interface ButtonProps {
 
 const WaterQuality: React.FC<ButtonProps> = ({ title, style }) => {
   return (
+    
     <TouchableOpacity style={[styles.button, style]}>
+    <Link href="/(tabs)/DebrisMain" asChild>  
       <Text style={styles.buttonText}>{title}</Text>
+    </Link>  
     </TouchableOpacity>
+    
+    
   );
 };
 
