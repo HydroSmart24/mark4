@@ -12,7 +12,7 @@ const WaterQuality: React.FC<ButtonProps> = ({ title, style }) => {
   return (
     
     <TouchableOpacity style={[styles.button, style]}>
-    <Link href="/Consumption/Available" asChild>  
+    <Link href="/(tabs)/DebrisMain" asChild>  
       <Text style={styles.buttonText}>{title}</Text>
     </Link>  
     </TouchableOpacity>

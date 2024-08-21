@@ -39,10 +39,3 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
-
-#firebaseConfig
-firebase/firebaseConfig.js
-
-# package-lock.json
-package-lock.json
-
