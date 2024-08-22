@@ -1,21 +1,24 @@
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import TankLevel from '@/components/AvailableTank/TankLevel';
 import HomeFilterHealth from '@/components/Guage/HomeFilterHealth';
 import WaterQuality from '@/components/Buttons/WaterQuality';
 import RequestWaterButton from '@/components/Buttons/RequestWaterButton';
 import IconButton from '@/components/Buttons/IconButton';
 import BasicContainer from '@/components/Containers/BasicContainer';
+import Prediction from '@/components/PredictConumption/PredictConsumpGraph';
+import { Link } from 'expo-router'; // Import Link from expo-router
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <BasicContainer style={styles.basicContainer} height={250}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <BasicContainer style={styles.basicContainer} height={300}> 
         <View style={styles.rowContainer}>
           <View style={styles.leftColumn}>
             <HomeFilterHealth size={90} value={30} />
           </View>
           <View style={styles.rightColumn}>
-            <TankLevel size={170} />
+            <TankLevel size={160} />
           </View>
         </View>
         <WaterQuality title="Water Quality" style={styles.waterQualityButton} />
@@ -25,22 +28,21 @@ export default function TabOneScreen() {
         <RequestWaterButton title="Request Water" />
         <IconButton title="Purchase Water" style={styles.buttonSpacing} />
       </View>
-    </View>
+      
+      <Prediction style={styles.prediction} />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollContainer: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 100,
   },
-  containerSpacing: {
-    marginBottom: 20,
-  },
   basicContainer: {
-    width: '85%', 
+    width: '80%', 
     marginBottom: 20, 
   },
   rowContainer: {
@@ -63,13 +65,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingHorizontal: 45, // Adds padding to the sides
-    marginTop: 20, // Adjusts the spacing between the BasicContainer and buttons
+    paddingHorizontal: 45, 
+    marginTop: 20, 
   },
   buttonSpacing: {
-    marginLeft: 25, // Space between the buttons
+    marginLeft: 25, 
   },
   waterQualityButton: {
     width: '90%',
+  },
+  touchable: {
+    width: '100%', // Ensure the TouchableOpacity takes the full width of its container
+  },
+  prediction: {
+    marginTop: 50, 
+    width: '90%', 
   },
 });
