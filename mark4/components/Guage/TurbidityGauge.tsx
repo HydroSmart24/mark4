@@ -2,23 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-interface HalfPremiumProps {
+interface TurbidityGaugeProps {
   size?: number;
   value?: number; // The dynamic value to be passed, optional
-  marginTop?: number; // Optional marginTop prop
-  marginBottom?: number; // Optional marginBottom prop
 }
 
-const HalfPremium: React.FC<HalfPremiumProps> = ({
-  size = 80,
-  value = 0,
-  marginTop = 0, // Default to 0 if not provided
-  marginBottom = 0, // Default to 0 if not provided
-}) => {
+const TurbidityGauge: React.FC<TurbidityGaugeProps> = ({ size = 80, value = 0 }) => {
   const adjustedSize = size / 2; // Adjust to scale the SVG correctly
-  const strokeWidth = 3; // Fixed stroke width since we're working within a fixed viewBox
+  const strokeWidth = 2; // Fixed stroke width since we're working within a fixed viewBox
   const circleRadius = 16; // Radius is fixed according to the viewBox
-  const progressStrokeWidth = 1; // Define the progress stroke width
+  const progressStrokeWidth = 2; // Define the progress stroke width
   const circumference = 2 * Math.PI * circleRadius; // Calculate the circumference of the circle
 
   // Initialize animated value with 0 to ensure animation starts from 0
@@ -27,8 +20,27 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({
   // Interpolating the animated value to get the strokeDashoffset
   const strokeDashoffset = animatedValue.interpolate({
     inputRange: [0, 100],
-    outputRange: [circumference, circumference / 2],
+    outputRange: [circumference * 1, circumference * 0.25], // Adjusted for 3/4 circle
   });
+
+  // Determine the color based on the value
+  let strokeColor = '#10B981'; // default to green
+  let innerStrokeColor = '#D1FAE5'; // default to green - 100
+  let centerText = 'Good'; // default to good
+
+  if (value > 25 && value <= 50) {
+    strokeColor = '#FBBF24'; // yellow
+    innerStrokeColor = '#FEF3C7';
+    centerText = 'Good';
+  } else if (value > 50 && value <= 75) {
+    strokeColor = '#F97316'; // orange
+    innerStrokeColor = '#FFEDD5';
+    centerText = 'Bad';
+  } else if (value > 75) {
+    strokeColor = '#DC2626'; // red
+    innerStrokeColor = '#FEE2E2';
+    centerText = 'Bad';
+  }
 
   // Animation effect
   useEffect(() => {
@@ -42,20 +54,12 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({
   }, [value]);
 
   return (
-    <View
-      style={{
-        ...styles.container,
-        width: size,
-        height: size,
-        marginTop, // Apply marginTop
-        marginBottom, // Apply marginBottom
-      }}
-    >
+    <View style={{ ...styles.container, width: size, height: size }}>
       <Svg
         width={size}
         height={size}
         viewBox="0 0 36 36"
-        style={{ transform: [{ rotate: '180deg' }] }} // Rotate the SVG
+        style={{ transform: [{ rotate: '-225deg' }] }} // Rotate to start from the bottom
       >
         {/* Background Circle (Gauge) */}
         <Circle
@@ -63,10 +67,10 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({
           cy="18"
           r={circleRadius}
           fill="none"
-          stroke="#E0E7FF" // equivalent to blue-100
+          stroke={innerStrokeColor} // Set inner stroke color based on value
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
-          strokeDashoffset={circumference / 2} // Half circle
+          strokeDashoffset={circumference * 0.25} // Adjusted to show 3/4 of the circle
           strokeLinecap="round"
         />
         {/* Gauge Progress */}
@@ -75,7 +79,7 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({
           cy="18"
           r={circleRadius}
           fill="none"
-          stroke="#2563EB" // equivalent to blue-600
+          stroke={strokeColor} // Color changes based on value
           strokeWidth={progressStrokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
@@ -84,19 +88,9 @@ const HalfPremium: React.FC<HalfPremiumProps> = ({
       </Svg>
 
       {/* Value Text */}
-      <View
-        style={{
-          ...styles.valueContainer,
-          top: adjustedSize * 0.8, // Adjust based on size
-          left: '50%',
-          transform: [
-            { translateX: -(adjustedSize * 0.52) },
-            { translateY: -(adjustedSize * 0.50) },
-          ],
-        }}
-      >
-        <Text style={{ ...styles.valueText, fontSize: adjustedSize * 0.4 }}>{value}%</Text>
-        <Text style={{ ...styles.labelText, fontSize: adjustedSize * 0.2 }}>Filter Health</Text>
+      <View style={styles.valueContainer}>
+        <Text style={{ ...styles.valueText, fontSize: adjustedSize * 0.4 }}>{centerText}</Text>
+        <Text style={{ ...styles.labelText, fontSize: adjustedSize * 0.2 }}>Turbidity</Text>
       </View>
     </View>
   );
@@ -111,8 +105,16 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     position: 'absolute',
+    top: '50%',
+    left: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    transform: [
+      { translateX: -60 }, // Adjust these values based on your circle size
+      { translateY: -60 },
+    ],
   },
   valueText: {
     fontWeight: 'bold',
@@ -123,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HalfPremium;
+export default TurbidityGauge;

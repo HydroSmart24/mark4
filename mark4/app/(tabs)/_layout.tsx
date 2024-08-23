@@ -48,13 +48,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="DebrisMain"
-        options={{
-          title: 'Water Quality',
-          tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="three"
         options={{
           title: 'Order Water',

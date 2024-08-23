@@ -12,7 +12,7 @@ const handlePress = () => {
   router.push('/Debris/DebrisMain'); // Navigate to the desired screen
 };
 
-const WaterQuality: React.FC<ButtonProps> = ({ title, style }) => {
+const DetectDebris: React.FC<ButtonProps> = ({ title, style }) => {
   return (
     
     <TouchableOpacity style={[styles.button, style]} onPress={handlePress}>
@@ -39,5 +39,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WaterQuality;
+export default DetectDebris;
 
