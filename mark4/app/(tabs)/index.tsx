@@ -1,51 +1,84 @@
-import { Pressable, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-import Button3D from '@/components/Buttons/Button3D';
-import IconButton from '@/components/Buttons/IconButton';
-import RequestWaterButton from '@/components/Buttons/RequestWaterButton';
-import BasicContainer from '@/components/Containers/BasicContainer';
-import HalfPremium from '@/components/Guage/HalfPremium';
+import React from 'react';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import TankLevel from '@/components/AvailableTank/TankLevel';
 import HomeFilterHealth from '@/components/Guage/HomeFilterHealth';
-
 import WaterQuality from '@/components/Buttons/WaterQuality';
-import { Link, router } from 'expo-router';
+import RequestWaterButton from '@/components/Buttons/RequestWaterButton';
+import IconButton from '@/components/Buttons/IconButton';
+import BasicContainer from '@/components/Containers/BasicContainer';
+import Prediction from '@/components/PredictConumption/PredictConsumpGraph';
+import { Link } from 'expo-router'; // Import Link from expo-router
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <BasicContainer style={styles.containerSpacing} height={400}>
-        <HomeFilterHealth size={90} value={30}/>
-   
-        
-          <WaterQuality title='Water Quality'/>
-        
-      
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <BasicContainer style={styles.basicContainer} height={300}> 
+        <View style={styles.rowContainer}>
+          <View style={styles.leftColumn}>
+            <HomeFilterHealth size={90} value={30} />
+          </View>
+          <View style={styles.rightColumn}>
+            <TankLevel size={160} />
+          </View>
+        </View>
+        <WaterQuality title="Water Quality" style={styles.waterQualityButton} />
       </BasicContainer>
-      <View style={styles.buttonContent}>
-        <RequestWaterButton title='Request Water' style={styles.buttonSpacing}/>
-        <IconButton title='Purchase Water'/>
+      
+      <View style={styles.buttonRow}>
+        <RequestWaterButton title="Request Water" />
+        <IconButton title="Purchase Water" style={styles.buttonSpacing} />
       </View>
-    </View>
+      
+      <Prediction style={styles.prediction} />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollContainer: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 100,
   },
-  containerSpacing: {
-    marginBottom: 20, // Adjust this value to control the spacing between BasicContainer and buttons
+  basicContainer: {
+    width: '80%', 
+    marginBottom: 20, 
   },
-  buttonContent: {
+  rowContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  leftColumn: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  rightColumn: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 45, 
+    marginTop: 20, 
   },
   buttonSpacing: {
-    marginRight: 30 // Adjust this value as needed
+    marginLeft: 25, 
+  },
+  waterQualityButton: {
+    width: '90%',
+  },
+  touchable: {
+    width: '100%', // Ensure the TouchableOpacity takes the full width of its container
+  },
+  prediction: {
+    marginTop: 50, 
+    width: '90%', 
   },
 });

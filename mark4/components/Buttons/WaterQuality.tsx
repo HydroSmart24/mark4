@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 const handlePress = () => {
-  router.push('/Debris/DebrisMain'); // Navigate to the desired screen
+  router.push('/(tabs)/DebrisMain'); // Navigate to the desired screen
 };
 
 const WaterQuality: React.FC<ButtonProps> = ({ title, style }) => {
