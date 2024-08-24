@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 4, // equivalent to rounded
     borderBottomWidth: 4, // equivalent to border-b-4
     borderBottomColor: '#2B6CB0', // equivalent to border-blue-700
+    marginTop: 20, // equivalent to mt-5
   },
   buttonText: {
     color: '#FFF', // equivalent to text-white

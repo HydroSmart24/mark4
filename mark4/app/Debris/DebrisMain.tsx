@@ -20,8 +20,11 @@ export default function DebrisMainScreen() {
           <PhGauge size={120} value={50} />
           <TurbidityGauge size={120} value={4} />
         </View>
-
-        <DetectDebris title="Detect Debris" style={{ marginTop: 100,marginBottom: 200 }} />
+        
+        <View style={styles.detectContainer}>
+          <ReusableText text={"Click to detect debris in the tank*"} color="#DCDCDC" size={15} opacity={20} />
+          <DetectDebris title="Detect Debris" />
+        </View>
       </View>
     </ScrollView>
   );
@@ -43,6 +46,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '80%', // Adjust width as needed
     marginTop: 80, // Adjust margin as needed
+  },
+  detectContainer: {
+    marginTop: 100, // Adjust the top margin as needed
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 150, // Adjust the bottom margin as needed
   },
   title: {
     fontSize: 20,
