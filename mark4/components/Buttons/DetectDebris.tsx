@@ -9,10 +9,10 @@ interface ButtonProps {
 }
 
 const handlePress = () => {
-  router.push('/(tabs)/DebrisMain'); // Navigate to the desired screen
+  router.push('/Debris/DebrisMain'); // Navigate to the desired screen
 };
 
-const WaterQuality: React.FC<ButtonProps> = ({ title, style }) => {
+const DetectDebris: React.FC<ButtonProps> = ({ title, style }) => {
   return (
     
     <TouchableOpacity style={[styles.button, style]} onPress={handlePress}>
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 4, // equivalent to rounded
     borderBottomWidth: 4, // equivalent to border-b-4
     borderBottomColor: '#2B6CB0', // equivalent to border-blue-700
+    marginTop: 20, // equivalent to mt-5
   },
   buttonText: {
     color: '#FFF', // equivalent to text-white
@@ -39,5 +40,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WaterQuality;
+export default DetectDebris;
 
