@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { fetchAverageDistance } from '../../utils/FetchDistance';
 
-export default function TankLevel({ style = {} }) {
+export default function TankLevel({ size = 200, style = {} }) {
     const [printedAverage, setPrintedAverage] = useState<number | null>(null);
     const [tankVolume, setTankVolume] = useState<number | null>(null);
 
@@ -35,14 +35,23 @@ export default function TankLevel({ style = {} }) {
     }, [tankVolume]);
 
     return (
-        <View style={[styles.circle, style]}>
-            <Animated.View style={[styles.fill, { height: animatedHeight.interpolate({
-                inputRange: [0, 100],
-                outputRange: ['0%', '100%'],
-            }) }]} />
+        <View style={[styles.circle, { width: size, height: size, borderRadius: size / 2 }, style]}>
+            <Animated.View
+                style={[
+                    styles.fill,
+                    {
+                        height: animatedHeight.interpolate({
+                            inputRange: [0, 100],
+                            outputRange: ['0%', '100%'],
+                        }),
+                    },
+                ]}
+            />
             <View style={styles.textContainer}>
-                <Text style={styles.volume}>{tankVolume !== null ? tankVolume : 0}</Text>
-                <Text style={styles.liters}>liters</Text>
+                <Text style={[styles.volume, { fontSize: size / 6 }]}>
+                    {tankVolume !== null ? tankVolume : 0}
+                </Text>
+                <Text style={[styles.liters, { fontSize: size / 12 }]}>liters</Text>
             </View>
         </View>
     );
@@ -50,13 +59,10 @@ export default function TankLevel({ style = {} }) {
 
 const styles = StyleSheet.create({
     circle: {
-        width: 200,
-        height: 200,
         borderWidth: 2,
         borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 100,
         backgroundColor: '#EFEFEF',
         overflow: 'hidden', // Ensure the fill doesn't overflow the circle
         position: 'relative',
@@ -74,12 +80,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     volume: {
-        fontSize: 32,
         fontWeight: 'bold',
         color: 'black',
     },
     liters: {
-        fontSize: 16,
         color: 'black',
     },
 });
